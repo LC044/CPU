@@ -1,0 +1,105 @@
+#! /c/Source/iverilog-install/bin/vvp
+:ivl_version "12.0 (devel)" "(s20150603-1110-g18392a46)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision + 0;
+:vpi_module "D:\iverilog\lib\ivl\system.vpi";
+:vpi_module "D:\iverilog\lib\ivl\vhdl_sys.vpi";
+:vpi_module "D:\iverilog\lib\ivl\vhdl_textio.vpi";
+:vpi_module "D:\iverilog\lib\ivl\v2005_math.vpi";
+:vpi_module "D:\iverilog\lib\ivl\va_math.vpi";
+S_0000016cdb1e2f30 .scope module, "alu" "alu" 2 1;
+ .timescale 0 0;
+    .port_info 0 /OUTPUT 32 "c";
+    .port_info 1 /INPUT 32 "a";
+    .port_info 2 /INPUT 32 "b";
+    .port_info 3 /INPUT 4 "aluop";
+o0000016cdb218028 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+o0000016cdb218118 .functor BUFZ 32, C4<zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz>; HiZ drive
+L_0000016cdb05a910 .functor OR 32, o0000016cdb218028, o0000016cdb218118, C4<00000000000000000000000000000000>, C4<00000000000000000000000000000000>;
+L_0000016cdb05b440 .functor AND 32, o0000016cdb218028, o0000016cdb218118, C4<11111111111111111111111111111111>, C4<11111111111111111111111111111111>;
+v0000016cdb05b560_0 .net *"_ivl_10", 0 0, L_0000016cdb25d120;  1 drivers
+L_0000016cdb25e048 .functor BUFT 1, C4<00000000000000000000000000000001>, C4<0>, C4<0>, C4<0>;
+v0000016cdb05b3a0_0 .net/2u *"_ivl_12", 31 0, L_0000016cdb25e048;  1 drivers
+L_0000016cdb25e090 .functor BUFT 1, C4<00000000000000000000000000000000>, C4<0>, C4<0>, C4<0>;
+v0000016cdb05a870_0 .net/2u *"_ivl_14", 31 0, L_0000016cdb25e090;  1 drivers
+v0000016cdb25da80_0 .net "a", 31 0, o0000016cdb218028;  0 drivers
+v0000016cdb25d580_0 .net "add_result", 31 0, L_0000016cdb25dee0;  1 drivers
+v0000016cdb25d6c0_0 .net "addu_result", 31 0, L_0000016cdb25dbc0;  1 drivers
+o0000016cdb2180b8 .functor BUFZ 4, C4<zzzz>; HiZ drive
+v0000016cdb25d760_0 .net "aluop", 3 0, o0000016cdb2180b8;  0 drivers
+v0000016cdb25d620_0 .net "and_result", 31 0, L_0000016cdb05b440;  1 drivers
+v0000016cdb25d440_0 .net "b", 31 0, o0000016cdb218118;  0 drivers
+v0000016cdb25d800_0 .var "c", 31 0;
+v0000016cdb25d8a0_0 .net "or_result", 31 0, L_0000016cdb05a910;  1 drivers
+v0000016cdb25df80_0 .net "slt_result", 31 0, L_0000016cdb25d080;  1 drivers
+v0000016cdb25db20_0 .net "subu_result", 31 0, L_0000016cdb25d260;  1 drivers
+E_0000016cdb059550 .event anyedge, v0000016cdb25d440_0, v0000016cdb25da80_0, v0000016cdb25d760_0;
+L_0000016cdb25dbc0 .arith/sum 32, o0000016cdb218028, o0000016cdb218118;
+L_0000016cdb25d260 .arith/sub 32, o0000016cdb218028, o0000016cdb218118;
+L_0000016cdb25dee0 .arith/sum 32, o0000016cdb218028, o0000016cdb218118;
+L_0000016cdb25d120 .cmp/gt.s 32, o0000016cdb218118, o0000016cdb218028;
+L_0000016cdb25d080 .functor MUXZ 32, L_0000016cdb25e090, L_0000016cdb25e048, L_0000016cdb25d120, C4<>;
+    .scope S_0000016cdb1e2f30;
+T_0 ;
+    %wait E_0000016cdb059550;
+    %load/vec4 v0000016cdb25d760_0;
+    %dup/vec4;
+    %pushi/vec4 1, 0, 4;
+    %cmp/u;
+    %jmp/1 T_0.0, 6;
+    %dup/vec4;
+    %pushi/vec4 3, 0, 4;
+    %cmp/u;
+    %jmp/1 T_0.1, 6;
+    %dup/vec4;
+    %pushi/vec4 0, 0, 4;
+    %cmp/u;
+    %jmp/1 T_0.2, 6;
+    %dup/vec4;
+    %pushi/vec4 4, 0, 4;
+    %cmp/u;
+    %jmp/1 T_0.3, 6;
+    %dup/vec4;
+    %pushi/vec4 5, 0, 4;
+    %cmp/u;
+    %jmp/1 T_0.4, 6;
+    %dup/vec4;
+    %pushi/vec4 10, 0, 4;
+    %cmp/u;
+    %jmp/1 T_0.5, 6;
+    %pushi/vec4 291, 0, 32;
+    %store/vec4 v0000016cdb25d800_0, 0, 32;
+    %jmp T_0.7;
+T_0.0 ;
+    %load/vec4 v0000016cdb25d6c0_0;
+    %store/vec4 v0000016cdb25d800_0, 0, 32;
+    %jmp T_0.7;
+T_0.1 ;
+    %load/vec4 v0000016cdb25db20_0;
+    %store/vec4 v0000016cdb25d800_0, 0, 32;
+    %jmp T_0.7;
+T_0.2 ;
+    %load/vec4 v0000016cdb25d580_0;
+    %store/vec4 v0000016cdb25d800_0, 0, 32;
+    %jmp T_0.7;
+T_0.3 ;
+    %load/vec4 v0000016cdb25d620_0;
+    %store/vec4 v0000016cdb25d800_0, 0, 32;
+    %jmp T_0.7;
+T_0.4 ;
+    %load/vec4 v0000016cdb25d8a0_0;
+    %store/vec4 v0000016cdb25d800_0, 0, 32;
+    %jmp T_0.7;
+T_0.5 ;
+    %load/vec4 v0000016cdb25df80_0;
+    %store/vec4 v0000016cdb25d800_0, 0, 32;
+    %jmp T_0.7;
+T_0.7 ;
+    %pop/vec4 1;
+    %jmp T_0;
+    .thread T_0, $push;
+# The file index is used to find the file name in the following table.
+:file_names 3;
+    "N/A";
+    "<interactive>";
+    "alu.v";
